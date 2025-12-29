@@ -11,7 +11,8 @@ import {
     LogOut,
     Menu,
     X,
-    Bell
+    Bell,
+    FolderTree
 } from 'lucide-react'
 import { useTasks } from '../hooks/useTasks'
 
@@ -25,6 +26,7 @@ export default function Layout() {
         { name: 'مهامي', href: '/my-tasks', icon: ClipboardList, showBadge: true },
         ...(isAdmin ? [
             { name: 'جميع المهام', href: '/tasks', icon: ListTodo },
+            { name: 'أنواع المهام', href: '/categories', icon: FolderTree },
             { name: 'الشركات', href: '/companies', icon: Building2 },
             { name: 'الموظفين', href: '/employees', icon: Users },
             { name: 'التقارير', href: '/reports', icon: BarChart3 },
@@ -42,10 +44,7 @@ export default function Layout() {
                 <button className="menu-btn" onClick={() => setSidebarOpen(true)}>
                     <Menu size={24} />
                 </button>
-                <div className="sidebar-logo">
-                    <div className="login-logo" style={{ width: 36, height: 36, fontSize: '1rem' }}>W</div>
-                    <span style={{ fontWeight: 600 }}>Wise</span>
-                </div>
+                <div className="login-logo" style={{ width: 36, height: 36, fontSize: '1rem' }}>W</div>
                 <div className="notification-bell">
                     <Bell size={20} />
                     {pendingTasksCount > 0 && (
@@ -67,13 +66,13 @@ export default function Layout() {
             <aside className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
                 <div className="sidebar-header">
                     <div className="sidebar-logo">
-                        <div className="login-logo" style={{ width: 48, height: 48, fontSize: '1.5rem' }}>W</div>
-                        <h1 style={{ fontSize: '1.5rem' }}>Wise</h1>
+                        <div className="login-logo">W</div>
                     </div>
                     {sidebarOpen && (
                         <button
                             className="modal-close"
                             onClick={() => setSidebarOpen(false)}
+                            style={{ color: 'white' }}
                         >
                             <X size={20} />
                         </button>
@@ -114,7 +113,11 @@ export default function Layout() {
                             </div>
                         </div>
                     </div>
-                    <button className="btn btn-secondary" onClick={handleLogout} style={{ width: '100%' }}>
+                    <button
+                        className="btn btn-secondary"
+                        onClick={handleLogout}
+                        style={{ width: '100%', background: 'rgba(255,255,255,0.1)', border: 'none', color: 'white' }}
+                    >
                         <LogOut size={18} />
                         <span>تسجيل الخروج</span>
                     </button>

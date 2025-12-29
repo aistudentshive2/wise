@@ -7,6 +7,7 @@ import Tasks from './pages/Tasks'
 import MyTasks from './pages/MyTasks'
 import Companies from './pages/Companies'
 import Employees from './pages/Employees'
+import Categories from './pages/Categories'
 import Reports from './pages/Reports'
 
 function ProtectedRoute({ children, adminOnly = false }) {
@@ -48,6 +49,7 @@ function AppRoutes() {
                 <Route index element={<Dashboard />} />
                 <Route path="tasks" element={<ProtectedRoute adminOnly><Tasks /></ProtectedRoute>} />
                 <Route path="my-tasks" element={<MyTasks />} />
+                <Route path="categories" element={<ProtectedRoute adminOnly><Categories /></ProtectedRoute>} />
                 <Route path="companies" element={<ProtectedRoute adminOnly><Companies /></ProtectedRoute>} />
                 <Route path="employees" element={<ProtectedRoute adminOnly><Employees /></ProtectedRoute>} />
                 <Route path="reports" element={<ProtectedRoute adminOnly><Reports /></ProtectedRoute>} />
