@@ -28,24 +28,19 @@ export default function Login() {
     }
 
     return (
-        <div className="login-page">
+        <div className="login-container">
             <div className="login-card">
-                <div className="login-logo">
-                    <div className="login-logo-icon">W</div>
+                <div className="login-header">
+                    <div className="login-logo">W</div>
                     <h1>Wise</h1>
                     <p>نظام إدارة المهام</p>
                 </div>
 
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} className="login-form">
                     {error && (
-                        <div className="flex items-center gap-2 mb-4" style={{
-                            padding: 'var(--space-3) var(--space-4)',
-                            background: 'var(--priority-critical-bg)',
-                            borderRadius: 'var(--radius-lg)',
-                            color: 'var(--priority-critical)'
-                        }}>
+                        <div className="login-error">
                             <AlertCircle size={18} />
-                            <span className="text-sm">{error}</span>
+                            <span>{error}</span>
                         </div>
                     )}
 
@@ -57,7 +52,7 @@ export default function Login() {
                                 right: '12px',
                                 top: '50%',
                                 transform: 'translateY(-50%)',
-                                color: 'var(--neutral-500)'
+                                color: 'var(--text-muted)'
                             }} />
                             <input
                                 type="text"
@@ -79,7 +74,7 @@ export default function Login() {
                                 right: '12px',
                                 top: '50%',
                                 transform: 'translateY(-50%)',
-                                color: 'var(--neutral-500)'
+                                color: 'var(--text-muted)'
                             }} />
                             <input
                                 type="password"
@@ -95,12 +90,12 @@ export default function Login() {
 
                     <button
                         type="submit"
-                        className="btn btn-primary btn-lg w-full mt-4"
+                        className="btn btn-primary login-btn"
                         disabled={loading}
                     >
                         {loading ? (
                             <>
-                                <div className="loading-spinner" style={{ width: '18px', height: '18px' }}></div>
+                                <div className="loading-spinner" style={{ width: '18px', height: '18px', borderWidth: '2px' }}></div>
                                 <span>جاري التحميل...</span>
                             </>
                         ) : (

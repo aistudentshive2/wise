@@ -262,18 +262,13 @@ export default function Reports() {
 
             {/* Report Period Display */}
             {dateRange && (
-                <div className="card mb-4" style={{
-                    background: 'linear-gradient(135deg, var(--primary-800), var(--primary-900))',
-                    borderColor: 'var(--primary-700)'
-                }}>
-                    <div className="card-body flex items-center gap-4">
-                        <Calendar size={24} style={{ color: 'var(--primary-400)' }} />
-                        <div>
-                            <h4>فترة التقرير</h4>
-                            <p className="text-muted">
-                                {format(dateRange.start, 'EEEE، d MMMM yyyy', { locale: ar })} - {format(dateRange.end, 'EEEE، d MMMM yyyy', { locale: ar })}
-                            </p>
-                        </div>
+                <div className="report-period-bar">
+                    <Calendar size={22} />
+                    <div style={{ flex: 1 }}>
+                        <h4 style={{ marginBottom: 2 }}>فترة التقرير</h4>
+                        <p>
+                            {format(dateRange.start, 'EEEE، d MMMM yyyy', { locale: ar })} - {format(dateRange.end, 'EEEE، d MMMM yyyy', { locale: ar })}
+                        </p>
                     </div>
                 </div>
             )}
@@ -375,7 +370,7 @@ export default function Reports() {
                                                     <div style={{
                                                         width: '100px',
                                                         height: '8px',
-                                                        background: 'var(--neutral-700)',
+                                                        background: 'var(--surface-200)',
                                                         borderRadius: 'var(--radius-full)',
                                                         overflow: 'hidden'
                                                     }}>
