@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Outlet, NavLink, useLocation } from 'react-router-dom'
+import { Outlet, NavLink } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import {
     LayoutDashboard,
@@ -18,7 +18,6 @@ import { useTasks } from '../hooks/useTasks'
 export default function Layout() {
     const { user, logout, isAdmin } = useAuth()
     const [sidebarOpen, setSidebarOpen] = useState(false)
-    const location = useLocation()
     const { pendingTasksCount } = useTasks()
 
     const navigation = [
@@ -37,73 +36,76 @@ export default function Layout() {
     }
 
     return (
-        <div className="app-container">
+        <div className="app-layout">
             {/* Mobile Header */}
             <header className="mobile-header">
-                <button className="btn btn-ghost btn-icon" onClick={() => setSidebarOpen(true)}>
+                <button className="menu-btn" onClick={() => setSidebarOpen(true)}>
                     <Menu size={24} />
                 </button>
-                <div className="flex items-center gap-2">
-                    <div className="sidebar-logo">W</div>
-                    <span className="font-semibold">Wise</span>
+                <div className="sidebar-logo">
+                    <div className="login-logo" style={{ width: 36, height: 36, fontSize: '1rem' }}>W</div>
+                    <span style={{ fontWeight: 600 }}>Wise</span>
                 </div>
                 <div className="notification-bell">
-                    <Bell size={22} />
+                    <Bell size={20} />
                     {pendingTasksCount > 0 && (
-                        <span className="notification-count">{pendingTasksCount}</span>
+                        <span className="notification-badge">{pendingTasksCount}</span>
                     )}
                 </div>
             </header>
 
             {/* Mobile Overlay */}
-            <div
-                className={`mobile-overlay ${sidebarOpen ? 'open' : ''}`}
-                onClick={() => setSidebarOpen(false)}
-            />
+            {sidebarOpen && (
+                <div
+                    className="modal-overlay"
+                    style={{ zIndex: 99 }}
+                    onClick={() => setSidebarOpen(false)}
+                />
+            )}
 
             {/* Sidebar */}
             <aside className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
                 <div className="sidebar-header">
-                    <div className="sidebar-logo">W</div>
-                    <span className="sidebar-title">Wise</span>
-                    <button
-                        className="btn btn-ghost btn-icon"
-                        onClick={() => setSidebarOpen(false)}
-                        style={{ marginRight: 'auto', display: sidebarOpen ? 'flex' : 'none' }}
-                    >
-                        <X size={20} />
-                    </button>
+                    <div className="sidebar-logo">
+                        <div className="login-logo" style={{ width: 48, height: 48, fontSize: '1.5rem' }}>W</div>
+                        <h1 style={{ fontSize: '1.5rem' }}>Wise</h1>
+                    </div>
+                    {sidebarOpen && (
+                        <button
+                            className="modal-close"
+                            onClick={() => setSidebarOpen(false)}
+                        >
+                            <X size={20} />
+                        </button>
+                    )}
                 </div>
 
                 <nav className="sidebar-nav">
-                    <div className="nav-section">
-                        <div className="nav-section-title">القائمة الرئيسية</div>
-                        {navigation.map((item) => (
-                            <NavLink
-                                key={item.href}
-                                to={item.href}
-                                className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
-                                onClick={() => setSidebarOpen(false)}
-                                end={item.href === '/'}
-                            >
-                                <item.icon size={20} />
-                                <span>{item.name}</span>
-                                {item.showBadge && pendingTasksCount > 0 && (
-                                    <span className="badge badge-critical" style={{ marginRight: 'auto' }}>
-                                        {pendingTasksCount}
-                                    </span>
-                                )}
-                            </NavLink>
-                        ))}
-                    </div>
+                    {navigation.map((item) => (
+                        <NavLink
+                            key={item.href}
+                            to={item.href}
+                            className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}
+                            onClick={() => setSidebarOpen(false)}
+                            end={item.href === '/'}
+                        >
+                            <item.icon size={20} />
+                            <span>{item.name}</span>
+                            {item.showBadge && pendingTasksCount > 0 && (
+                                <span className="badge badge-critical" style={{ marginRight: 'auto' }}>
+                                    {pendingTasksCount}
+                                </span>
+                            )}
+                        </NavLink>
+                    ))}
                 </nav>
 
                 <div className="sidebar-footer">
-                    <div className="user-card">
+                    <div className="user-info">
                         <div className="user-avatar">
                             {user?.full_name_ar?.charAt(0) || user?.username?.charAt(0)?.toUpperCase()}
                         </div>
-                        <div className="user-info">
+                        <div className="user-details">
                             <div className="user-name">{user?.full_name_ar || user?.username}</div>
                             <div className="user-role">
                                 <span className={`badge ${isAdmin ? 'badge-admin' : 'badge-employee'}`}>
@@ -111,10 +113,11 @@ export default function Layout() {
                                 </span>
                             </div>
                         </div>
-                        <button className="btn btn-ghost btn-icon" onClick={handleLogout} title="تسجيل الخروج">
-                            <LogOut size={18} />
-                        </button>
                     </div>
+                    <button className="btn btn-secondary" onClick={handleLogout} style={{ width: '100%' }}>
+                        <LogOut size={18} />
+                        <span>تسجيل الخروج</span>
+                    </button>
                 </div>
             </aside>
 
