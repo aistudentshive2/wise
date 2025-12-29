@@ -144,10 +144,9 @@ export function useTasks() {
         high: tasks.filter(t => t.priority === 'high' && t.status !== 'done').length
     }
 
-    // Pending tasks for notification
-    const pendingTasksCount = isAdmin
-        ? tasks.filter(t => t.status !== 'done').length
-        : tasks.filter(t => t.assigned_to === user?.id && t.status !== 'done').length
+    // Pending tasks for notification - ONLY for assigned employee, not admin
+    const myPendingTasks = tasks.filter(t => t.assigned_to === user?.id && t.status !== 'done')
+    const pendingTasksCount = isAdmin ? 0 : myPendingTasks.length
 
     return {
         tasks,
@@ -155,6 +154,7 @@ export function useTasks() {
         error,
         stats,
         pendingTasksCount,
+        myPendingTasks,
         fetchTasks,
         createTask,
         updateTask,
