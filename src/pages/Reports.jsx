@@ -190,19 +190,13 @@ export default function Reports() {
             {/* Header */}
             <div className="page-header">
                 <div className="page-title">
-                    <BarChart3 size={28} style={{ color: 'var(--primary-400)' }} />
+                    <BarChart3 size={28} style={{ color: 'var(--primary)' }} />
                     <h1>التقارير</h1>
                 </div>
-                <div className="flex gap-2">
-                    <button className="btn btn-secondary" onClick={exportToExcel}>
-                        <FileSpreadsheet size={18} />
-                        <span>تصدير Excel</span>
-                    </button>
-                    <button className="btn btn-primary" onClick={exportToPDF}>
-                        <FileText size={18} />
-                        <span>تصدير PDF</span>
-                    </button>
-                </div>
+                <button className="btn btn-primary" onClick={exportToExcel}>
+                    <FileSpreadsheet size={18} />
+                    <span>تصدير Excel</span>
+                </button>
             </div>
 
             {/* Filters */}
