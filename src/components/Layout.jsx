@@ -33,20 +33,16 @@ export default function Layout() {
         ] : [])
     ]
 
-    const handleLogout = () => {
-        logout()
-    }
-
     return (
         <div className="app-layout">
             {/* Mobile Header */}
             <header className="mobile-header">
                 <button className="menu-btn" onClick={() => setSidebarOpen(true)}>
-                    <Menu size={24} />
+                    <Menu size={22} />
                 </button>
-                <div className="login-logo" style={{ width: 36, height: 36, fontSize: '1rem' }}>W</div>
+                <div className="login-logo">W</div>
                 <div className="notification-bell">
-                    <Bell size={20} />
+                    <Bell size={18} />
                     {pendingTasksCount > 0 && (
                         <span className="notification-badge">{pendingTasksCount}</span>
                     )}
@@ -65,14 +61,12 @@ export default function Layout() {
             {/* Sidebar */}
             <aside className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
                 <div className="sidebar-header">
-                    <div className="sidebar-logo">
-                        <div className="login-logo">W</div>
-                    </div>
+                    <div className="login-logo">W</div>
                     {sidebarOpen && (
                         <button
-                            className="modal-close"
+                            className="menu-btn"
                             onClick={() => setSidebarOpen(false)}
-                            style={{ color: 'white' }}
+                            style={{ position: 'absolute', left: 8 }}
                         >
                             <X size={20} />
                         </button>
@@ -88,7 +82,7 @@ export default function Layout() {
                             onClick={() => setSidebarOpen(false)}
                             end={item.href === '/'}
                         >
-                            <item.icon size={20} />
+                            <item.icon size={18} />
                             <span>{item.name}</span>
                             {item.showBadge && pendingTasksCount > 0 && (
                                 <span className="badge badge-critical" style={{ marginRight: 'auto' }}>
@@ -106,19 +100,17 @@ export default function Layout() {
                         </div>
                         <div className="user-details">
                             <div className="user-name">{user?.full_name_ar || user?.username}</div>
-                            <div className="user-role">
-                                <span className={`badge ${isAdmin ? 'badge-admin' : 'badge-employee'}`}>
-                                    {isAdmin ? 'مدير' : 'موظف'}
-                                </span>
-                            </div>
+                            <span className={`badge ${isAdmin ? 'badge-admin' : 'badge-employee'}`} style={{ marginTop: 4 }}>
+                                {isAdmin ? 'مدير' : 'موظف'}
+                            </span>
                         </div>
                     </div>
                     <button
                         className="btn btn-secondary"
-                        onClick={handleLogout}
-                        style={{ width: '100%', background: 'rgba(255,255,255,0.1)', border: 'none', color: 'white' }}
+                        style={{ width: '100%' }}
+                        onClick={logout}
                     >
-                        <LogOut size={18} />
+                        <LogOut size={16} />
                         <span>تسجيل الخروج</span>
                     </button>
                 </div>

@@ -39,7 +39,7 @@ export default function Login() {
                 <form onSubmit={handleSubmit} className="login-form">
                     {error && (
                         <div className="login-error">
-                            <AlertCircle size={18} />
+                            <AlertCircle size={16} />
                             <span>{error}</span>
                         </div>
                     )}
@@ -47,17 +47,17 @@ export default function Login() {
                     <div className="form-group">
                         <label className="form-label">اسم المستخدم</label>
                         <div style={{ position: 'relative' }}>
-                            <User size={18} style={{
+                            <User size={16} style={{
                                 position: 'absolute',
-                                right: '12px',
+                                right: 12,
                                 top: '50%',
                                 transform: 'translateY(-50%)',
-                                color: 'var(--text-muted)'
+                                color: '#8a9aaa'
                             }} />
                             <input
                                 type="text"
                                 className="form-input"
-                                style={{ paddingRight: '40px' }}
+                                style={{ paddingRight: 36 }}
                                 placeholder="أدخل اسم المستخدم"
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
@@ -69,17 +69,17 @@ export default function Login() {
                     <div className="form-group">
                         <label className="form-label">كلمة السر</label>
                         <div style={{ position: 'relative' }}>
-                            <Lock size={18} style={{
+                            <Lock size={16} style={{
                                 position: 'absolute',
-                                right: '12px',
+                                right: 12,
                                 top: '50%',
                                 transform: 'translateY(-50%)',
-                                color: 'var(--text-muted)'
+                                color: '#8a9aaa'
                             }} />
                             <input
                                 type="password"
                                 className="form-input"
-                                style={{ paddingRight: '40px' }}
+                                style={{ paddingRight: 36 }}
                                 placeholder="أدخل كلمة السر"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
@@ -95,8 +95,8 @@ export default function Login() {
                     >
                         {loading ? (
                             <>
-                                <div className="loading-spinner" style={{ width: '18px', height: '18px', borderWidth: '2px' }}></div>
-                                <span>جاري التحميل...</span>
+                                <div className="loading-spinner" style={{ width: 16, height: 16, borderWidth: 2 }} />
+                                <span>جاري الدخول...</span>
                             </>
                         ) : (
                             <span>تسجيل الدخول</span>
